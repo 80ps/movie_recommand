@@ -1,0 +1,8 @@
+.env
+/Lib
+/Script
+/data
+pyenev.cfg
+/venv
+/node_modules
+
