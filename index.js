@@ -4,13 +4,33 @@ const path = require('path');
 const spawn = require('child_process').spawn;
 const port = 8080;
 const app = express();
+require('dotenv').config();
+
 
 app.use(cors());
 app.use(express.json());
 
+const isDevelopment = () => {
+  return process.env.NODE_ENV ==='development ';
+}
+
+const pythonExePath = isDevelopment() 
+  ? path.join('C:','conda','envs','recon_env','python_exe') 
+  : path.join('/home/ubuntu/miniconda','envs','myenv','myenv','bin','python3');
+
+
 app.get('/', (req, res) => {
   res.send('Hello from Node server!');
 });
+
+const pythonPath = path.join('/home/ubuntu/miniconda',
+  'envs',
+  'myenv',
+  'myenv',
+  'bin',
+  'python3'
+)
+
 
 app.get('/random/:count', (req, res) => {
   try {
@@ -20,7 +40,7 @@ app.get('/random/:count', (req, res) => {
   
 
     const count = req.params.count;
-    const result = spawn(pythonPath, [scriptPath, 'random', count]);
+    const result = spawn(python_exe, [scriptPath, 'random', count]);
 
     let responseData = '';
 
@@ -54,7 +74,7 @@ app.get('/latest/:count', (req, res) => {
 
 
     const count = req.params.count;
-    const result = spawn(pythonPath, [scriptPath, 'latest', count]);
+    const result = spawn(python_exe, [scriptPath, 'latest', count]);
 
     let responseData = '';
 
@@ -88,7 +108,7 @@ app.get('/genres/:genre/:count', (req, res) => {
 
     const genre = req.params.genre;
     const count = req.params.count;
-    const result = spawn(pythonPath, [scriptPath, 'genres', genre, count]);
+    const result = spawn(python_exe, [scriptPath, 'genres', genre, count]);
 
     let responseData = '';
 
@@ -122,7 +142,7 @@ app.get('/item-based/:item', (req, res) => {
 
 
     const item = req.params.item;
-    const result = spawn(pythonPath, [scriptPath, 'item-based', item]);
+    const result = spawn(python_exe, [scriptPath, 'item-based', item]);
 
     let responseData = '';
 
