@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const isDevelopment = () => {
-  return process.env.NODE_ENV ==='development ';
+  return process.env.NODE_ENV === 'development';
 }
 
 const pythonExePath = isDevelopment()
@@ -35,9 +35,7 @@ app.get('/', (req, res) => {
 app.get('/random/:count', (req, res) => {
   try {
     const scriptPath = path.join(__dirname, 'resolver.py');
-    const pythonPath = path.join(__dirname, 'venv/bin/python');
-
-  
+    // const pythonPath = path.join(__dirname, 'venv', 'bin', 'python');
 
     const count = req.params.count;
     const result = spawn(pythonExePath, [scriptPath, 'random', count]);
@@ -70,7 +68,7 @@ app.get('/random/:count', (req, res) => {
 app.get('/latest/:count', (req, res) => {
   try {
     const scriptPath = path.join(__dirname, 'resolver.py');
-    const pythonPath = path.join(__dirname, 'venv/bin/python');
+    // const pythonPath = path.join(__dirname, 'venv/bin/python');
 
 
     const count = req.params.count;
@@ -104,7 +102,7 @@ app.get('/latest/:count', (req, res) => {
 app.get('/genres/:genre/:count', (req, res) => {
   try {
     const scriptPath = path.join(__dirname, 'resolver.py');
-    const pythonPath = path.join(__dirname, 'venv/bin/python');
+    // const pythonPath = path.join(__dirname, 'venv/bin/python');
 
     const genre = req.params.genre;
     const count = req.params.count;
@@ -138,7 +136,7 @@ app.get('/genres/:genre/:count', (req, res) => {
 app.get('/item-based/:item', (req, res) => {
   try {
     const scriptPath = path.join(__dirname, 'recommender.py');
-    const pythonPath = path.join(__dirname, 'venv/bin/python');
+    // const pythonPath = path.join(__dirname, 'venv/bin/python');
 
 
     const item = req.params.item;
